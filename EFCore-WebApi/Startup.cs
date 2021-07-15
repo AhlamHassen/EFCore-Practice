@@ -10,21 +10,29 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EFCore_WebApi.Models;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace EFCore_WebApi
 {
     public class Startup
     {
+        //to read the connection string from the appsettings.json
+        private IConfiguration _config;
+
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _config = configuration;
         }
 
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContextPool<AppDBcontext>(options => options.
+            UseSqlServer(_config.GetConnectionString("EmployeeDBconnection")));
+
             services.AddControllers();
         }
 
