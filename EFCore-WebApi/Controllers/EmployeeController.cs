@@ -30,6 +30,12 @@ namespace EFCore_WebApi.Controllers
             return BadRequest();
         }
 
+        [HttpGet]
+        public IEnumerable<Employee> GetEmployees()
+        {
+           return this.employeeRepository.GetAllEmployees();
+
+        }
 
         
     }
