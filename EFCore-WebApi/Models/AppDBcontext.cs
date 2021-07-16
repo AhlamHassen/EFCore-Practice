@@ -15,5 +15,28 @@ namespace EFCore_WebApi.Models
         {
 
         }
+
+        //to populate the employees table -- seeding data
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Employee>().HasData(
+                   new Employee
+                   {
+                       Id = 1,
+                       Name = "Ahlam",
+                       Email = "ahlam@gmail.com"
+                   },
+
+                   new Employee
+                   {
+                       Id = 2,
+                       Name = "alu",
+                       Email = "alu@gmai.com"
+                   }
+
+                );
+        }
+
+
     }
 }
