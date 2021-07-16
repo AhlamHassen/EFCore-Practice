@@ -33,6 +33,13 @@ namespace EFCore_WebApi
             services.AddDbContextPool<AppDBcontext>(options => options.
             UseSqlServer(_config.GetConnectionString("EmployeeDBconnection")));
 
+            //adds the implementation of the interface to IEmployeeRepository in other words provide an instance of
+            //EmployeeSQLrepository whenever an instance of IEmployeeRepository is asked
+
+            //we used AddScoped instead of AddTransient to make the instance of ESQLrepo availabe throughout the scope
+            //of a given http request, when new http req new instance will be created and made availabe in same way
+            services.AddScoped<IEmployeeRepository, EmployeeSQLrepository>();
+
             services.AddControllers();
         }
 
