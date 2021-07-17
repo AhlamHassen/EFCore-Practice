@@ -20,6 +20,7 @@ namespace EFCore_WebApi.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Seed();
+            modelBuilder.entityBuild();
         }
 
 

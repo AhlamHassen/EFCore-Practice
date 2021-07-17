@@ -20,5 +20,8 @@ namespace EFCore_WebApi.Models
         [RegularExpression(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9.]+$", 
             ErrorMessage ="Invalid Email Format")]
         public string Email { get; set;  }
+
+        [Phone(ErrorMessage = "Invalid Phone number format")]
+        public string Phone { get; set; }
     }
 }

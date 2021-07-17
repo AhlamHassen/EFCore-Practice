@@ -31,5 +31,14 @@ namespace EFCore_WebApi.Models
                 );
 
         }
+
+        public static void entityBuild(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Customer>().HasKey(k => new
+            {
+                k.customer_id
+            });
+
+        }
     }
 }
