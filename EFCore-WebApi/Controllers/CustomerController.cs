@@ -18,6 +18,11 @@ namespace EFCore_WebApi.Controllers
             this.customerRepo = _icustomer;
         }
 
+        //This summary comments below are to show description and explain return types of endpoints in swagger.
+        /// <summary>
+        /// gets all customers from the customers table in our database
+        /// </summary>
+        /// <returns>It returns an array of customers</returns>
         [HttpGet("GetAll")]
         public async Task<ActionResult<IEnumerable<Customer>>> GetAllCustomers()
         {

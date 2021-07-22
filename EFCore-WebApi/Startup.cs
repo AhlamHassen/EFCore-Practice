@@ -12,6 +12,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using EFCore_WebApi.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
+using System.IO;
 
 
 namespace EFCore_WebApi
@@ -42,6 +45,17 @@ namespace EFCore_WebApi
             services.AddScoped<ICustomer, CustomerSQLrepository>();
 
             services.AddControllers();
+
+            //for generating the UI of swagger documentation
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("myV1", new OpenApiInfo {Title = "WebApi", Version="V1" });
+
+                //provide generated xml file to show comments
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,6 +75,13 @@ namespace EFCore_WebApi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/myV1/swagger.json", "My API V1");
             });
         }
     }
